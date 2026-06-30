@@ -1,0 +1,14 @@
+Total Revenue = SUM(cleaned_sales_data[Net_Revenue])
+
+Profit Margin % = 
+DIVIDE(
+    SUM(cleaned_sales_data[Net_Revenue]) - SUM(cleaned_sales_data[Total_Cost]), 
+    [Total Revenue], 
+    0
+)
+
+MoM Growth Rate % = 
+VAR CurrentMonthRevenue = [Total Revenue]
+VAR PreviousMonthRevenue = CALCULATE([Total Revenue], DATEADD('Calendar'[Date], -1, MONTH))
+RETURN
+DIVIDE(CurrentMonthRevenue - PreviousMonthRevenue, PreviousMonthRevenue, 0)
